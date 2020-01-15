@@ -3,4 +3,4 @@ Multi-Edge / Multi-Cloud Orchestrator
 
 
 # API Definition
-the API definition for MEKKO is available [here](https://fbourque.github.io/MEKKO).
+the API definition for MEKKO is available [here](https://fbourque.github.io/MEKKO/index.html).
