@@ -2,7 +2,7 @@
     info:
       title: MEKKO API
       description: Multi-Edge / Multi-Cloud Application and Service Orchestration API
-      version: 2.0
+      version: "2.0"
     servers:
       - url: http://mekko.intel.com/v2
         description: MEKKO API Validation Server
@@ -20,47 +20,50 @@
                   properties:
                     name: 
                       type: string
-                      required: true
                       description: Name of the project
                     description: 
                       type: string
                       description: Description of the project
+                  required:
+                    - name
+                    - description
           responses:
             '201':
               description: New project was created
               content:
                 application/json:
-                  name: 
-                    type: string
-                    description: Name of the project
+                  schema:
+                      type: string
+                      description: Name of the project
         get:
           summary: Returns a list of projects
           description: Returns a list of MEKKO projects that have been previously created
           responses:
-            '200':    # status code
+            '200':
               description: A JSON array of MEKKO project names
               content:
                 application/json:
                   schema: 
-                    type: array
-                    items: 
-                      type: string
-                      description: Name of the project
-                    description: 
-                      type: string
-                      description: Description of the project
-      /project/{project-name}
+                    type: object
+                    properties:
+                      items: 
+                        type: string
+                        description: Name of the project
+                      description: 
+                        type: string
+                        description: Description of the project
+      /project/{project-name}:
         get:
           summary: Returns a project description by *name*
           description: Returns a list of MEKKO projects that have been previously created
           operationId: getProjectByName
           parameters:
-            -name: project-name
-             in: path
-             description: Project Name
-             required: true
-             schema:
-               type: string
+            - in: path
+              name: project-name
+              description: Project Name
+              required: true
+              schema:
+                type: string
           responses:
             '200':    # status code
               description: A JSON array of MEKKO project names
@@ -69,14 +72,24 @@
                   schema: 
                     type: array
                     items: 
-                      type: string
-                      description: Name of the project
-                    description: 
-                      type: string
-                      description: Description of the project
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Name of the project
+                        description: 
+                          type: string
+                          description: Description of the project
         delete:
           summary: Delete a project
           description: Deleting a MEKKO project and all of its associated resources.
+          parameters:
+            - in: path
+              name: project-name
+              description: Project Name
+              required: true
+              schema:
+                type: string
           content:
              application/json:
                 name: 
@@ -93,6 +106,13 @@
         put:
           summary: Modify the description of a project
           description: Modify the description of a project
+          parameters:
+            - in: path
+              name: project-name
+              description: Project Name
+              required: true
+              schema:
+                type: string
           content:
              application/json:
                 name: 
