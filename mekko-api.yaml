@@ -11,16 +11,16 @@
         post:
           summary: Create a new project
           description: Create a new MEKKO project that hosts all the resources associated with a composite application or service that is deployale
-        content:
-             application/json:
-                name: 
-                   type: string
-                   description: Name of the project
-                description: 
-                  type: string
-                  description: Description of the project
+          content:
+            application/json:
+              name: 
+                type: string
+                description: Name of the project
+              description: 
+                type: string
+                description: Description of the project
           responses:
-             '201':
+            '201':
               description: New project was created
               content:
                 application/json:
