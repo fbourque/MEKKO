@@ -12,17 +12,19 @@
           summary: Create a new project
           description: Create a new MEKKO project that hosts all the resources associated with a composite application or service that is deployale
           requestBody:
-            require: true
+            required: true
             content:
               application/json:
-                schemas:
-                  name: 
-                    type: string
-                    required: true
-                    description: Name of the project
-                  description: 
-                    type: string
-                    description: Description of the project
+                schema:
+                  type: object
+                  properties:
+                    name: 
+                      type: string
+                      required: true
+                      description: Name of the project
+                    description: 
+                      type: string
+                      description: Description of the project
           responses:
             '201':
               description: New project was created
@@ -34,6 +36,31 @@
         get:
           summary: Returns a list of projects
           description: Returns a list of MEKKO projects that have been previously created
+          responses:
+            '200':    # status code
+              description: A JSON array of MEKKO project names
+              content:
+                application/json:
+                  schema: 
+                    type: array
+                    items: 
+                      type: string
+                      description: Name of the project
+                    description: 
+                      type: string
+                      description: Description of the project
+      /project/{project-name}
+        get:
+          summary: Returns a project description by *name*
+          description: Returns a list of MEKKO projects that have been previously created
+          operationId: getProjectByName
+          parameters:
+            -name: project-name
+             in: path
+             description: Project Name
+             required: true
+             schema:
+               type: string
           responses:
             '200':    # status code
               description: A JSON array of MEKKO project names
