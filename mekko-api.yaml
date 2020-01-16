@@ -46,7 +46,7 @@
         delete:
           summary: Delete a project
           description: Deleting a MEKKO project and all of its associated resources.
-	  content:
+          content:
              application/json:
                 name: 
                    type: string
@@ -62,7 +62,7 @@
         put:
           summary: Modify the description of a project
           description: Modify the description of a project
-	  content:
+          content:
              application/json:
                 name: 
                    type: string
