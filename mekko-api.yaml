@@ -52,7 +52,7 @@
                       description: 
                         type: string
                         description: Description of the project
-      /project/{project-name}:
+      /projects/{project-name}:
         get:
           summary: Returns a project description by *name*
           description: Returns a list of MEKKO projects that have been previously created
@@ -90,19 +90,9 @@
               required: true
               schema:
                 type: string
-          content:
-             application/json:
-                name: 
-                   type: string
-                   description: Name of the project
           responses:
              '200':
               description: Project and the associated resources were deleted
-              content:
-                application/json:
-                  name: 
-                    type: string
-                    description: Name of the project
         put:
           summary: Modify the description of a project
           description: Modify the description of a project
@@ -113,19 +103,45 @@
               required: true
               schema:
                 type: string
-          content:
-             application/json:
-                name: 
-                   type: string
-                   description: Name of the project
-                description: 
-                  type: string
-                  description: Description of the project
           responses:
              '200':
               description: New project was created
+      /projects/{project-name}/apps:
+        post:
+          summary: Create a new  application
+          description: Create a new composite application under an exitig MEKKO project indicated by {project-name}
+          parameters:
+          - in: path
+            name: project-name
+            description: Project Name
+            required: true
+            schema:
+              type: string
+          requestBody:
+            required: true
+            content:
+              applicaton/json:
+                schema:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Name of th application
+                    description:
+                      type: string
+                      description: A description of the application
+                    version:
+                      type: string
+                      description: The version of the application
+                  required:
+                    - name 
+                    - version
+          responses:
+            '201':
+              description: The application was created
               content:
-                application/json:
-                  name: 
+                applicaton/json:
+                  schema:
                     type: string
-                    description: Name of the project
+                    description: The name of the application
+
