@@ -86,14 +86,6 @@
                         description: 
                           type: string
                           description: Description of the project
-        delete:
-          summary: Deletes a project
-          description: Delete a MEKKO project and all of its associated resources.
-          tags:
-            - Project Management API
-          responses:
-             '204':
-              description: Project and the associated resources were deleted
         put:
           summary: Modifies the description of a project
           description: Modify the description of a project
@@ -114,6 +106,14 @@
           responses:
              '200':
               description: The project description was updated 
+        delete:
+          summary: Deletes a project
+          description: Delete a MEKKO project and all of its associated resources.
+          tags:
+            - Project Management API
+          responses:
+             '204':
+              description: Project and the associated resources were deleted
       /projects/{project-name}/apps:
         parameters:
         - in: path
@@ -221,14 +221,6 @@
                         version:
                           type: string
                           description: The version of the application
-        delete:
-          summary: Deletes an application
-          description: Delete a specific *version* of an application (*app-name*) under a project *(project-name)*
-          tags:
-            - Composite Application Management API
-          responses:
-            '204':
-              description: The version of the application was deleted
         put:
           summary: Updates an application
           description: Update the information / metadata about a specific application created under a project indicates by *project-name*
@@ -237,6 +229,14 @@
           responses:
             '200':
               description: The application was updated
+        delete:
+          summary: Deletes an application
+          description: Delete a specific *version* of an application (*app-name*) under a project *(project-name)*
+          tags:
+            - Composite Application Management API
+          responses:
+            '204':
+              description: The version of the application was deleted
       /projects/{project-name}/apps/{app-name}/{version}/subapps:
         parameters: 
         - in: path
