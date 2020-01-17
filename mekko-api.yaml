@@ -10,7 +10,7 @@
       /projects:
         post:
           summary: Creates a new project
-          description: Create a new MEKKO project that hosts all the resources associated with a composite application or service that is deployale
+          description: Create a new MEKKO project that hosts all the resources associated with a composite application or service that is deployable
           tags:
             - Project Management API
           requestBody:
