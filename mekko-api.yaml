@@ -9,7 +9,7 @@
     paths:
       /projects:
         post:
-          summary: Create a new project
+          summary: Creates a new project
           description: Create a new MEKKO project that hosts all the resources associated with a composite application or service that is deployale
           tags:
             - Project Management API
@@ -64,7 +64,7 @@
             type: string
         get:
           summary: Returns a project description by *name*
-          description: Returns a list of MEKKO projects that have been previously created
+          description: Return a list of MEKKO projects that have been previously created
           operationId: getProjectByName
           tags:
             - Project Management API
@@ -85,18 +85,30 @@
                           type: string
                           description: Description of the project
         delete:
-          summary: Delete a project
-          description: Deleting a MEKKO project and all of its associated resources.
+          summary: Deletes a project
+          description: Delete a MEKKO project and all of its associated resources.
           tags:
             - Project Management API
           responses:
              '204':
               description: Project and the associated resources were deleted
         put:
-          summary: Modify the description of a project
+          summary: Modifies the description of a project
           description: Modify the description of a project
           tags:
             - Project Management API
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    description: 
+                      type: string
+                      description: Description of the project
+                  required:
+                    - description
           responses:
              '200':
               description: The project description was updated 
@@ -109,8 +121,8 @@
           schema:
             type: string
         post:
-          summary: Create a new application
-          description: Create a new composite application under an exitig MEKKO project indicated by {project-name}
+          summary: Creates a new application under a *project*
+          description: Create a new composite application under an exitig MEKKO project indicated by *project-name*
           tags:
             - Composite Application Management API
           requestBody:
@@ -122,7 +134,7 @@
                   properties:
                     name:
                       type: string
-                      description: Name of th application
+                      description: Name of the application
                     description:
                       type: string
                       description: A description of the application
@@ -141,8 +153,8 @@
                     type: string
                     description: The name of the application
         get:
-          summary: Retrieves all applications under a MEKKO project
-          description: Retrieves all of the composite-applicatons that have been creted under the project indicated by {project-name}
+          summary: Retrieves list of all applications under a MEKKO project
+          description: Retrieve all of the composite-applicatons that have been creted under the project identified by *project-name*
           tags:
             - Composite Application Management API
           responses:
@@ -157,7 +169,7 @@
                       properties:
                         name:
                           type: string
-                          description: Name of the applcaton
+                          description: Name of the applicaton
                         description: 
                           type: string
                           description: Description of the application
@@ -186,7 +198,7 @@
             type: string
         get:
           summary: Retrieves information about a specific application
-          description: Retrieves specific informaion about a composite-application created uder the project indicated by {project-name}
+          description: Retrieve specific information about a composite-application created under the project indicated by *project-name*
           tags:
             - Composite Application Management API
           responses:
@@ -209,15 +221,15 @@
                           description: The version of the application
         delete:
           summary: Deletes an application
-          description: Deletes a specific application based on its version under a project
+          description: Delete a specific *version* of an application (*app-name*) under a project *(project-name)*
           tags:
             - Composite Application Management API
           responses:
             '204':
-              description: The application was deleted
+              description: The version of the application was deleted
         put:
           summary: Updates an application
-          description: Updates the information / metadata about a specific application created under a project indicates by {project-name}
+          description: Update the information / metadata about a specific application created under a project indicates by *project-name*
           tags:
             - Composite Application Management API
           responses:
@@ -244,8 +256,8 @@
           schema:
             type: string
         post:
-          summary: Create a new sub-application
-          description: Create a new sub-applicaiton under an exitig application indicated by {app-name} and attach the associated Helm chart for the application
+          summary: Creates a new sub-application or service under an MEKKO application
+          description: Create a new sub-application or service under an existing application indicated by {app-name} and attach the associated Helm chart to it
           tags:
             - Sub-Application Management API
           requestBody:
@@ -277,8 +289,8 @@
                     type: string
                     description: The name of the application
         get:
-          summary: Retrieves all the sub-applications
-          description: Retrieves the sub-applications under an existing application indicated by {app-name}. The associated Helm chart can be retrieved by operating on the specific subapplication resource.
+          summary: Retrieves the list of all the sub-applications
+          description: Retrieves the list of all sub-applications under an existing application indicated by {app-name}. The associated Helm chart can be retrieved by operating on the specific sub-application resource.
           tags:
             - Sub-Application Management API
           responses:
@@ -316,7 +328,7 @@
           schema:
             type: string
         get:
-          summary: Retrieves a sub-application 
+          summary: Retrieve the information associated to a sub-application 
           description: Retrieves an existing sub-application under an existing application indicated by {app-name} and fetches the associated Helm chart for the sub-application
           tags:
             - Sub-Application Management API
@@ -337,10 +349,6 @@
                       file:
                         type: string
                         format: binary
-                    required:
-                    - name
-                    - description
-                    - file
         delete:
           summary: Deletes a sub-application
           description: Deletes a sub-application under an existing application indicated by {app-name} and the associated Helm chart.
