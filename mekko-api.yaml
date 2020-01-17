@@ -11,6 +11,8 @@
         post:
           summary: Create a new project
           description: Create a new MEKKO project that hosts all the resources associated with a composite application or service that is deployale
+          tags:
+            - Project Management API
           requestBody:
             required: true
             content:
@@ -64,7 +66,8 @@
           summary: Returns a project description by *name*
           description: Returns a list of MEKKO projects that have been previously created
           operationId: getProjectByName
-         
+          tags:
+            - Project Management API
           responses:
             '200':    # status code
               description: A JSON array of MEKKO project names
@@ -84,12 +87,16 @@
         delete:
           summary: Delete a project
           description: Deleting a MEKKO project and all of its associated resources.
+          tags:
+            - Project Management API
           responses:
              '204':
               description: Project and the associated resources were deleted
         put:
           summary: Modify the description of a project
           description: Modify the description of a project
+          tags:
+            - Project Management API
           responses:
              '200':
               description: The project description was updated 
@@ -104,6 +111,8 @@
         post:
           summary: Create a new application
           description: Create a new composite application under an exitig MEKKO project indicated by {project-name}
+          tags:
+            - Composite Application Management API
           requestBody:
             required: true
             content:
@@ -134,6 +143,8 @@
         get:
           summary: Retrieves all applications under a MEKKO project
           description: Retrieves all of the composite-applicatons that have been creted under the project indicated by {project-name}
+          tags:
+            - Composite Application Management API
           responses:
             '200':    # status code
               description: A JSON array of applications
@@ -176,6 +187,8 @@
         get:
           summary: Retrieves information about a specific application
           description: Retrieves specific informaion about a composite-application created uder the project indicated by {project-name}
+          tags:
+            - Composite Application Management API
           responses:
             '200':
               description: Information about a specific application
@@ -197,13 +210,16 @@
         delete:
           summary: Deletes an application
           description: Deletes a specific application based on its version under a project
-        
+          tags:
+            - Composite Application Management API
           responses:
             '204':
               description: The application was deleted
         put:
           summary: Updates an application
           description: Updates the information / metadata about a specific application created under a project indicates by {project-name}
+          tags:
+            - Composite Application Management API
           responses:
             '200':
               description: The application was updated
@@ -230,6 +246,8 @@
         post:
           summary: Create a new sub-application
           description: Create a new sub-applicaiton under an exitig application indicated by {app-name} and attach the associated Helm chart for the application
+          tags:
+            - Sub-Application Management API
           requestBody:
             required: true
             content:
@@ -261,6 +279,8 @@
         get:
           summary: Retrieves all the sub-applications
           description: Retrieves the sub-applications under an existing application indicated by {app-name}. The associated Helm chart can be retrieved by operating on the specific subapplication resource.
+          tags:
+            - Sub-Application Management API
           responses:
             '201':
               description: The sub-application name
@@ -298,6 +318,8 @@
         get:
           summary: Retrieves a sub-application 
           description: Retrieves an existing sub-application under an existing application indicated by {app-name} and fetches the associated Helm chart for the sub-application
+          tags:
+            - Sub-Application Management API
           responses:
             '200':
               description: Information about a specific application
@@ -322,6 +344,8 @@
         delete:
           summary: Deletes a sub-application
           description: Deletes a sub-application under an existing application indicated by {app-name} and the associated Helm chart.
+          tags:
+            - Sub-Application Management API
           responses:
             '204':
               description: Sub-application was deleted
@@ -348,6 +372,8 @@
         post:
           summary: Create a generic placement intent 
           description: Creates a generic placement intent resource for the application. Once created, specific placement intents for the sub-applications can be defined
+          tags:
+            - Generic Placement Intents API
           requestBody:
             required: true
             content:
@@ -378,6 +404,8 @@
         get:
           summary: Retrieves the placement intents.
           description: Retrieves all the names of the generic placement intents
+          tags:
+            - Generic Placement Intents API
           responses:
             '200':
               description: A JSON array of all the generic placement intents 
