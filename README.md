@@ -1,6 +1,8 @@
 # MEKKO
 Multi-Edge / Multi-Cloud Orchestrator
 
+# Introduction
+.
 
 # Application Programming Interface (API)
 The API for MEKKO is based on the following interaction model between the actors and the orchestration and some concepts that are described below.
