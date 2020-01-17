@@ -85,7 +85,7 @@
           summary: Delete a project
           description: Deleting a MEKKO project and all of its associated resources.
           responses:
-             '200':
+             '204':
               description: Project and the associated resources were deleted
         put:
           summary: Modify the description of a project
@@ -199,7 +199,7 @@
           description: Deletes a specific application based on its version under a project
         
           responses:
-            '200':
+            '204':
               description: The application was deleted
         put:
           summary: Updates an application
@@ -207,5 +207,85 @@
           responses:
             '200':
               description: The application was updated
-          
+      /projects/{project-name}/apps/{app-name}/{version}/apps:
+        parameters: 
+        - in: path
+          name: project-name
+          description: Project name
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: app-name
+          description: Application name
+          required: true
+          schema: 
+            type: string
+        - in: path
+          name: version
+          description: Application version
+          required: true
+          schema:
+            type: string
+        post:
+          summary: Create a new sub-application
+          description: Create a new sub-applicaiton under an exitig application indicated by {app-name} and attach the associated Helm chart for the application
+          requestBody:
+            required: true
+            content:
+              multipart/form-data:
+                schema:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Name of the sub-application
+                    description:
+                      type: string
+                      description: A description of the sub-application
+                    file:
+                      type: string
+                      format: binary
+                  required:
+                    - name 
+                    - description
+                    - file
+          responses:
+            '201':
+              description: The sub-application was created
+              content:
+                applicaton/json:
+                  schema:
+                    type: string
+                    description: The name of the application
+        get:
+          summary: Retrieves a sub-application 
+          description: Retrieves an existing sub-application under an existing application indicated by {app-name} and fetches the associated Helm chart for the sub-application
+          responses:
+            '200':
+              description: Information about a specific application
+              content:
+                multipart/form-data:
+                  schema:
+                    type: object
+                    properties:
+                      name: 
+                        type: string
+                        description: Name of the sub-application
+                      descrition:
+                        type: string
+                        description: Description of the application
+                      file:
+                        type: string
+                        format: binary
+                    required:
+                    - name
+                    - description
+                    - file
+        delete:
+          summary: Deletes a sub-application
+          description: Deletes a sub-application under an existing application indicated by {app-name} and the associated Helm chart.
+          responses:
+            '204':
+              description: Sub-application was deleted
                 
