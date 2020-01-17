@@ -37,6 +37,12 @@
                   schema:
                       type: string
                       description: Name of the project
+              headers:
+                Location:
+                  description: 'Contains the URI of the newly created project, according to the structure: {apiRoot}/v2/projects/{project-name}'
+                  required: true
+                  schema:
+                  type: string
         get:
           summary: Returns a list of projects
           description: Returns a list of MEKKO projects that have been previously created
@@ -154,6 +160,12 @@
                   schema:
                     type: string
                     description: The name of the application
+              headers:
+                Location:
+                  description: 'Contains the URI of the newly created application, according to the structure: {apiRoot}/v2/projects/{project-name}/apps/{app-name}/{version}'
+                  required: true
+                  schema:
+                  type: string
         get:
           summary: Retrieves list of all applications under a MEKKO project
           description: Retrieve all of the composite-applicatons that have been creted under the project identified by *project-name*
@@ -290,6 +302,7 @@
                   schema:
                     type: string
                     description: The name of the application
+                    
         get:
           summary: Retrieves the list of all the sub-applications
           description: Retrieves the list of all sub-applications under an existing application indicated by {app-name}. The associated Helm chart can be retrieved by operating on the specific sub-application resource.
@@ -405,12 +418,18 @@
                     - description
           responses:
             '201':
-              description: The sub-application was created
+              description: The generic placement intent was created for the sub-application 
               content:
                 applicaton/json:
                   schema:
                     type: string
                     description: The name of the application
+              headers:
+                Location:
+                  description: 'Contains the URI of the newly created placement intent, according to the structure: {apiRoot}/v2/projects/{project-name}/apps/{app-name}/{version}/generic-placement-intents/{plcement-intent-name}'
+                  required: true
+                  schema:
+                  type: string
         get:
           summary: Retrieves the placement intents.
           description: Retrieves all the names of the generic placement intents
