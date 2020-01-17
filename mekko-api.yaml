@@ -207,7 +207,7 @@
           responses:
             '200':
               description: The application was updated
-      /projects/{project-name}/apps/{app-name}/{version}/apps:
+      /projects/{project-name}/apps/{app-name}/{version}/subapps:
         parameters: 
         - in: path
           name: project-name
@@ -259,6 +259,43 @@
                     type: string
                     description: The name of the application
         get:
+          summary: Retrieves all the sub-applications
+          description: Retrieves the sub-applications under an existing application indicated by {app-name}. The associated Helm chart can be retrieved by operating on the specific subapplication resource.
+          responses:
+            '201':
+              description: The sub-application name
+              content:
+                application/json:
+                  schema:
+                    type: string
+                    description: The name of the sub-application
+      /projects/{project-name}/apps/{app-name}/{version}/subapps/{subapp-name}:
+        parameters: 
+        - in: path
+          name: project-name
+          description: Project name
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: app-name
+          description: Application name
+          required: true
+          schema: 
+            type: string
+        - in: path
+          name: version
+          description: Application version
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: subapp-name
+          description: Subapplication name
+          required: true
+          schema:
+            type: string
+        get:
           summary: Retrieves a sub-application 
           description: Retrieves an existing sub-application under an existing application indicated by {app-name} and fetches the associated Helm chart for the sub-application
           responses:
@@ -288,4 +325,72 @@
           responses:
             '204':
               description: Sub-application was deleted
-                
+      /projects/{project-name}/apps/{app-name}/{version}/generic-placement-intents:
+        parameters: 
+        - in: path
+          name: project-name
+          description: Project name
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: app-name
+          description: Application name
+          required: true
+          schema: 
+            type: string
+        - in: path
+          name: version
+          description: Application version
+          required: true
+          schema:
+            type: string
+        post:
+          summary: Create a generic placement intent 
+          description: Creates a generic placement intent resource for the application. Once created, specific placement intents for the sub-applications can be defined
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: The name of the generic placement intent 
+                    description:
+                      type: string
+                      description: A description of the generic placement intent 
+                    logicalcloud:
+                      type: string
+                      format: The name of the logical cloud for the instantiation
+                  required:
+                    - name 
+                    - description
+          responses:
+            '201':
+              description: The sub-application was created
+              content:
+                applicaton/json:
+                  schema:
+                    type: string
+                    description: The name of the application
+        get:
+          summary: Retrieves the placement intents.
+          description: Retrieves all the names of the generic placement intents
+          responses:
+            '200':
+              description: A JSON array of all the generic placement intents 
+              content:
+                application/json:
+                  schema: 
+                    type: array
+                    items: 
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Name of the generic placement intent
+                        description:
+                          type: string
+                          description: A description of the generic placement intent
