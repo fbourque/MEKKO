@@ -36,7 +36,7 @@
                 application/json:
                   schema:
                       type: string
-                      description: Name of the project
+                      description: Name of the project. The URI of the created resource shall be returned in the "Location" HTTP header.
               headers:
                 Location:
                   description: 'Contains the URI of the newly created project, according to the structure: {apiRoot}/v2/projects/{project-name}'
@@ -129,8 +129,8 @@
           schema:
             type: string
         post:
-          summary: Creates a new application under a *project*
-          description: Create a new composite application under an exitig MEKKO project indicated by *project-name*
+          summary: Creates a new application under a project ({project-name})
+          description: Create a new composite application under an exitig MEKKO project indicated by {project-name}. The URI of the created resource shall be returned in the "Location" HTTP header.
           tags:
             - Composite Application Management API
           requestBody:
@@ -296,13 +296,18 @@
                     - file
           responses:
             '201':
-              description: The sub-application was created
+              description: The sub-application was created. The URI of the created resource shall be returned in the "Location" HTTP header.
               content:
                 applicaton/json:
                   schema:
                     type: string
                     description: The name of the application
-                    
+              headers:
+                Location:
+                  description: 'Contains the URI of the newly created application, according to the structure: {apiRoot}/v2/projects/{project-name}/apps/{app-name}/{version}/subapps/{sub-app-name}'
+                  required: true
+                  schema:
+                  type: string
         get:
           summary: Retrieves the list of all the sub-applications
           description: Retrieves the list of all sub-applications under an existing application indicated by {app-name}. The associated Helm chart can be retrieved by operating on the specific sub-application resource.
@@ -394,7 +399,7 @@
             type: string
         post:
           summary: Create a generic placement intent 
-          description: Creates a generic placement intent resource for the application. Once created, specific placement intents for the sub-applications can be defined
+          description: Creates a generic placement intent resource for the application. Once created, specific placement intents for the sub-applications can be defined. The URI of the created resource shall be returned in the "Location" HTTP header.
           tags:
             - Generic Placement Intents API
           requestBody:
